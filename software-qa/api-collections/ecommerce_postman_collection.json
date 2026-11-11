@@ -1,0 +1,149 @@
+{
+  "info": {
+    "name": "QA-Portfolio-ECommerce",
+    "description": "Core manual QA API test suite covering happy path, creation, boundary checks, and auth failure.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "GET - Fetch Single User Profile (Happy Path)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "https://dummyjson.com/users/1",
+          "protocol": "https",
+          "host": ["dummyjson", "com"],
+          "path": ["users", "1"]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              "pm.test(\"User object has correct ID and email\", function () {",
+              "    const jsonData = pm.response.json();",
+              "    pm.expect(jsonData.id).to.eql(1);",
+              "    pm.expect(jsonData.email).to.be.a('string');",
+              "});"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "POST - Register New User (Creation)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"firstName\": \"Alex\",\n  \"lastName\": \"Tester\",\n  \"age\": 28,\n  \"email\": \"alex.tester.qa@example.com\",\n  \"username\": \"alextest2026\"\n}"
+        },
+        "url": {
+          "raw": "https://dummyjson.com/users/add",
+          "protocol": "https",
+          "host": ["dummyjson", "com"],
+          "path": ["users", "add"]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Successful creation returns 200 or 201\", function () {",
+              "    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+              "});",
+              "pm.test(\"Response contains auto-generated ID\", function () {",
+              "    const res = pm.response.json();",
+              "    pm.expect(res).to.have.property('id');",
+              "    pm.expect(res.firstName).to.eql(\"Alex\");",
+              "});"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "GET - User Boundary Max Out of Range (404 Check)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "https://dummyjson.com/users/9999999",
+          "protocol": "https",
+          "host": ["dummyjson", "com"],
+          "path": ["users", "9999999"]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status code is 404 Not Found\", function () {",
+              "    pm.response.to.have.status(404);",
+              "});",
+              "pm.test(\"Error message is user-friendly\", function () {",
+              "    const res = pm.response.json();",
+              "    pm.expect(res.message).to.include(\"not found\");",
+              "});"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "POST - Auth Token Invalid Credentials (Security/Auth Check)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"username\": \"emilys\",\n  \"password\": \"wrong_password_attempt\"\n}"
+        },
+        "url": {
+          "raw": "https://dummyjson.com/auth/login",
+          "protocol": "https",
+          "host": ["dummyjson", "com"],
+          "path": ["auth", "login"]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Access denied with 400 or 401\", function () {",
+              "    pm.expect(pm.response.code).to.be.oneOf([400, 401]);",
+              "});",
+              "pm.test(\"No token generated\", function () {",
+              "    const res = pm.response.json();",
+              "    pm.expect(res).to.not.have.property('accessToken');",
+              "});"
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

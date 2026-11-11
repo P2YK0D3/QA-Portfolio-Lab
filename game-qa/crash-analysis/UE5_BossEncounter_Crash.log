@@ -1,0 +1,15 @@
+[2026.11.10-14.22.01:115][120]LogWorld: Bringing up level /Game/Maps/Dungeon_Level02 up for play...
+[2026.11.10-14.22.02:400][150]LogStreaming: Display: 1.12s spent streaming in 32 textures for Actor [BP_PlayerCharacter_C_1].
+[2026.11.10-14.22.10:320][310]LogScript: Verbose: Player entered Boss Trigger Volume [Trigger_Boss_Room_03]
+[2026.11.10-14.22.11:012][332]LogAnimation: Warning: BlendSpace [BS_Boss_Phase2] has null animation sequence in slot 3!
+[2026.11.10-14.22.11:015][332]LogAudio: Warning: SoundCue [/Game/Audio/Boss_Roar_Cue] failed to load asset [/Game/Audio/Roar_02.wav] - file missing from pak.
+[2026.11.10-14.22.12:442][395]LogMemory: Critical: Allocation failed for 8388608 bytes! Available Physical Memory: 14MB. Total Virtual Memory: 16384MB.
+[2026.11.10-14.22.12:443][395]LogWindows: Error: === Critical error: ===
+[2026.11.10-14.22.12:444][395]LogWindows: Error: Fatal error: [File:D:\Build\Engine\Source\Runtime\Core\Private\GenericPlatform\GenericPlatformMemory.cpp] [Line: 241]
+[2026.11.10-14.22.12:445][395]LogWindows: Error: Ran out of memory allocation pool (OOM). Trying to allocate 8MB with only 14MB remaining physical head-room.
+[2026.11.10-14.22.12:446][395]LogWindows: Error:
+[2026.11.10-14.22.12:447][395]LogWindows: Error: [Callstack] 0x00007ff7a124b810 ShooterGame.exe!FGenericPlatformMemory::OnOutOfMemory() [GenericPlatformMemory.cpp:241]
+[2026.11.10-14.22.12:448][395]LogWindows: Error: [Callstack] 0x00007ff7a145129c ShooterGame.exe!FMallocBinned2::Allocate() [MallocBinned2.cpp:1120]
+[2026.11.10-14.22.12:449][395]LogWindows: Error: [Callstack] 0x00007ff7a2109844 ShooterGame.exe!USkeletalMeshComponent::InitLODInfos() [SkeletalMeshComponent.cpp:789]
+[2026.11.10-14.22.12:450][395]LogWindows: Error: [Callstack] 0x00007ff7a2245b02 ShooterGame.exe!ABossCharacter::SpawnPhase2Minions() [BossCharacter.cpp:142]
+[2026.11.10-14.22.12:451][395]LogWindows: FPlatformMisc::RequestExit(1, "OOM Fatal Crash")

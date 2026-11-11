@@ -1,0 +1,32 @@
+{
+  "save_version": "1.4.0",
+  "player": {
+    "profile_id": "usr_9942",
+    "character_name": "Valerius",
+    "level": 42,
+    "current_health": -50,
+    "max_health": 850,
+    "currency": {
+      "gold": 2147483648,
+      "gems": 75
+    },
+    "inventory": [
+      {
+        "item_id": "wpn_broadsword_steel",
+        "upgrade_tier": 3,
+        "durability": 100
+      },
+      { "item_id": "pot_health_large", "upgrade_tier": 0, "quantity": 15 },
+      { "item_id": "key_catacomb_gate", "upgrade_tier": 0, "quantity": 1 }
+    ],
+    "quest_flags": {
+      "prologue_complete": true,
+      "boss_catacombs_defeated": false,
+      "current_active_quest": "QST_FIND_GATE_KEY"
+    },
+    "checkpoint": {
+      "map_name": "Dungeon_Level02",
+      "coordinates": { "x": 1042.85, "y": -340.12, "z": 88.0 }
+    }
+  }
+
